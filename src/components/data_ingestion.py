@@ -9,6 +9,10 @@ from dataclasses import dataclass
 
 from src.components.data_transformation import DataTransformation
 from src.components.data_transformation import DataTransformationConfig
+
+from src.components.model_trainer import ModelTrainerConfig
+from src.components.model_trainer import ModelTrainer
+
     
 @dataclass
 class DataIngestionConfig:
@@ -41,11 +45,16 @@ class DataIngestion:
             )
         except Exception as e:
             raise CustomException(e, sys)
+        
+
 if __name__ == "__main__":
     obj = DataIngestion()
     train_data, test_data = obj.initiate_data_ingestion()  
 
     data_transformation = DataTransformation()
-    data_transformation.initiate_data_transformation(train_data, test_data)
+    train_arr,test_arr ,_= data_transformation.initiate_data_transformation(train_data, test_data)
     
 
+    modeltrainer = ModelTrainer()
+    r2_score_value = modeltrainer.initiate_model_trainer(train_arr, test_arr)
+    print("R2 Score:", r2_score_value)

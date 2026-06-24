@@ -78,7 +78,7 @@ class DataTransformation:
             target_column_name = "math score"
             numerical_columns = ['writing score', 'reading score']
 
-            # ✅ সঠিক
+            
             input_feature_train_df = train_df.drop(columns=['math score'], axis=1)
             target_feature_train_df = train_df['math score']
 
